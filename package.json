@@ -1,0 +1,19 @@
+{
+  "name": "arduino-database-conn",
+  "version": "0.0.1",
+  "description": "arduino database connection test",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.0.0"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wcm381/arduino-database-conn"
+  }
+}

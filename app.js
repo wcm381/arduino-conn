@@ -12,17 +12,6 @@ var mysql = require('mysql2');
 // HTTP Port Number for HTTP Server
 var HTTP_PORT = 8080;
 
-
-// Configure Connection to SQL Database
-var connection = mysql.createConnection({
-        host     : 'XXXXXXX',
-        user     : 'XXXXX',
-        password : 'XXXXXX',
-        port     : '3306',
-        database : 'XXXXX'
-});
-
-
 // Create HTTP Server for Arduino Connection
 server = http.createServer( function(req,res){
    // Get URL Path of Request
@@ -34,6 +23,15 @@ server = http.createServer( function(req,res){
     case '/':
       // Check for Proper Request Method
       if (req.method == 'POST') {
+        // Configure Connection to SQL Database
+        var connection = mysql.createConnection({
+                host     : 'XXXXXXX',
+                user     : 'XXXXX',
+                password : 'XXXXXX',
+                port     : '3306',
+                database : 'XXXXX'
+        });          
+          
         // Connect to SQL Database
         connection.connect(function(err) {
         if (err) {
@@ -71,9 +69,9 @@ server = http.createServer( function(req,res){
             // Get Components of Parsed JSON Packet
             var tempVal = obj.temp;
             // Create SET to Insert Into Table
-            var dataSet = { Time: timeVal, Temperature: tempVal };
+            var dataSet = { Time: timeVal, Temp: tempVal };
             // Insert the SET to Table
-            connection.query( 'INSERT INTO sampleTbl SET ?', sampleSet, function(err, result) {
+            connection.query( 'INSERT INTO sampleTbl SET ?', dataSet, function(err, result) {
                 if ( err ) {
                     console.log("ERROR: " + err.message);	
                     throw err;
